@@ -1,0 +1,51 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+.idea/
+.vscode/
+.cursor/
+
+# Go build artifacts
+bin/
+dist/
+out/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.*
+*.coverprofile
+
+# Go workspace / tooling
+go.work
+go.work.sum
+
+# Helm packaging
+*.tgz
+
+# Local env / secrets (never commit)
+.env
+.env.*
+*.pem
+*.key
+*kubeconfig*
+*.kubeconfig
+.aws/
+credentials
+*secret*
+*secrets*
+
+# Terraform (if added later)
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+

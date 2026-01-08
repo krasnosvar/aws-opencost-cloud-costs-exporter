@@ -1,0 +1,957 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "unit": "currencyUSD"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (opencost_cloudcost_daily_total_cost{window=\"$window\",cost_metric=\"$costMetric\"})",
+          "interval": "1d",
+          "legendFormat": "Cost",
+          "format": "time_series",
+          "instant": false,
+          "refId": "A"
+        }
+      ],
+      "transformations": [],
+      "title": "Cumulative cost for $window (by day)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "unit": "currencyUSD"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 10
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (opencost_cloudcost_daily_service_cost{service=\"$service\",window=\"$window\",cost_metric=\"$costMetric\"})",
+          "interval": "1d",
+          "legendFormat": "Cost",
+          "format": "time_series",
+          "instant": false,
+          "refId": "A"
+        }
+      ],
+      "transformations": [],
+      "title": "Daily cost ($service)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 16,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "unit": "currencyUSD"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 4,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Cost"
+              }
+            ]
+          },
+          "pluginVersion": "12.3.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "$datasource"
+              },
+              "expr": "opencost_cloudcost_service_cost{window=\"$window\",cost_metric=\"$costMetric\"}",
+              "format": "table",
+              "instant": true,
+              "refId": "A"
+            }
+          ],
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true,
+                  "__name__": true,
+                  "app_kubernetes_io_instance": true,
+                  "app_kubernetes_io_managed_by": true,
+                  "app_kubernetes_io_name": true,
+                  "app_kubernetes_io_version": true,
+                  "cost_metric": true,
+                  "container": true,
+                  "endpoint": true,
+                  "helm_sh_chart": true,
+                  "instance": true,
+                  "job": true,
+                  "deployment": true,
+                  "machine": true,
+                  "pod_template_hash": true,
+                  "ready": true,
+                  "namespace": true,
+                  "pod": true,
+                  "window": true
+                },
+                "indexByName": {
+                  "service": 0,
+                  "Value": 1
+                },
+                "renameByName": {
+                  "service": "Service",
+                  "Value": "Cost"
+                }
+              }
+            }
+          ],
+          "columns": [],
+          "title": "Cloud costs by service ($window)",
+          "type": "table"
+        },
+        {
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 10,
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "unit": "currencyUSD"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Cost"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 120
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "right"
+                  }
+                ]
+              }
+            ]
+          },
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Cost"
+              }
+            ]
+          },
+          "pluginVersion": "12.3.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "$datasource"
+              },
+              "expr": "topk(500, opencost_cloudcost_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\",name=~\".*/${service:regex}$\"})",
+              "format": "table",
+              "instant": true,
+              "refId": "A"
+            }
+          ],
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true,
+                  "__name__": true,
+                  "aggregate": true,
+                  "app_kubernetes_io_instance": true,
+                  "app_kubernetes_io_managed_by": true,
+                  "app_kubernetes_io_name": true,
+                  "app_kubernetes_io_version": true,
+                  "container": true,
+                  "cost_metric": true,
+                  "endpoint": true,
+                  "helm_sh_chart": true,
+                  "instance": true,
+                  "job": true,
+                  "deployment": true,
+                  "machine": true,
+                  "pod_template_hash": true,
+                  "ready": true,
+                  "namespace": true,
+                  "pod": true,
+                  "window": true
+                },
+                "indexByName": {
+                  "name": 0,
+                  "Value": 1
+                },
+                "renameByName": {
+                  "name": "Resource",
+                  "Value": "Cost"
+                }
+              }
+            }
+          ],
+          "columns": [],
+          "title": "Resources for $service ($window)",
+          "type": "table"
+        }
+      ],
+      "title": "Tables",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 11,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 2,
+                "pointSize": 4,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "unit": "currencyUSD"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 12,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "12.3.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "$datasource"
+              },
+              "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (opencost_cloudcost_daily_aggregate_cost{aggregate=\"item\",name=\"$resource\",window=\"$window\",cost_metric=\"$costMetric\"})",
+              "interval": "1d",
+              "legendFormat": "Cost",
+              "format": "time_series",
+              "instant": false,
+              "refId": "A"
+            }
+          ],
+          "transformations": [],
+          "title": "Daily cost ($resource)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "unit": "currencyUSD"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Cost"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 120
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "right"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 13,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Day"
+              }
+            ]
+          },
+          "pluginVersion": "12.3.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "$datasource"
+              },
+              "expr": "last_over_time(opencost_cloudcost_daily_aggregate_cost{aggregate=\"item\",name=\"$resource\",window=\"$window\",cost_metric=\"$costMetric\"}[$window])",
+              "format": "table",
+              "instant": true,
+              "refId": "A"
+            }
+          ],
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Time": true,
+                  "__name__": true,
+                  "aggregate": true,
+                  "app_kubernetes_io_instance": true,
+                  "app_kubernetes_io_managed_by": true,
+                  "app_kubernetes_io_name": true,
+                  "app_kubernetes_io_version": true,
+                  "container": true,
+                  "cost_metric": true,
+                  "endpoint": true,
+                  "helm_sh_chart": true,
+                  "instance": true,
+                  "job": true,
+                  "deployment": true,
+                  "machine": true,
+                  "pod_template_hash": true,
+                  "ready": true,
+                  "namespace": true,
+                  "pod": true,
+                  "window": true,
+                  "name": true
+                },
+                "indexByName": {
+                  "day": 0,
+                  "Value": 1
+                },
+                "renameByName": {
+                  "day": "Day",
+                  "Value": "Cost"
+                }
+              }
+            }
+          ],
+          "columns": [],
+          "title": "Daily costs table ($resource)",
+          "type": "table"
+        }
+      ],
+      "title": "Resource details",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "unit": "currencyUSD"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (last_over_time(opencost_cloudcost_daily_service_cost{window=\"$window\",cost_metric=\"$costMetric\"}[25h]) and on(service) topk(10, last_over_time(opencost_cloudcost_service_cost{window=\"$window\",cost_metric=\"$costMetric\"}[13h])))",
+          "interval": "1d",
+          "legendFormat": "{{service}}",
+          "format": "time_series",
+          "instant": false,
+          "refId": "A"
+        }
+      ],
+      "transformations": [],
+      "title": "Daily cost by resources (top 10)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "unit": "currencyUSD"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 10
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (last_over_time(opencost_cloudcost_daily_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\"}[25h]) and on(name) topk(10, last_over_time(opencost_cloudcost_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\"}[13h])))",
+          "interval": "1d",
+          "legendFormat": "{{name}}",
+          "format": "time_series",
+          "instant": false,
+          "refId": "A"
+        }
+      ],
+      "transformations": [],
+      "title": "Daily cost by resource items (top 10)",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 40,
+  "tags": [
+    "opencost",
+    "cloudcost",
+    "prometheus"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "trident",
+          "value": "vzVqTL7Sk"
+        },
+        "label": "Data source",
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "text": "14d",
+          "value": "14d"
+        },
+        "label": "Window",
+        "name": "window",
+        "options": [
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": true,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          },
+          {
+            "selected": false,
+            "text": "60d",
+            "value": "60d"
+          },
+          {
+            "selected": false,
+            "text": "90d",
+            "value": "90d"
+          }
+        ],
+        "query": "7d,14d,30d,60d,90d",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "amortizedNetCost",
+          "value": "amortizedNetCost"
+        },
+        "label": "Cost metric",
+        "name": "costMetric",
+        "options": [
+          {
+            "selected": true,
+            "text": "amortizedNetCost",
+            "value": "amortizedNetCost"
+          },
+          {
+            "selected": false,
+            "text": "netCost",
+            "value": "netCost"
+          },
+          {
+            "selected": false,
+            "text": "amortizedCost",
+            "value": "amortizedCost"
+          },
+          {
+            "selected": false,
+            "text": "listCost",
+            "value": "listCost"
+          }
+        ],
+        "query": "amortizedNetCost,netCost,amortizedCost,listCost",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "text": "AmazonEC2",
+          "value": "AmazonEC2"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
+        "definition": "label_values(opencost_cloudcost_service_cost{window=\"$window\",cost_metric=\"$costMetric\"}, service)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Service",
+        "multi": false,
+        "name": "service",
+        "options": [],
+        "query": {
+          "query": "label_values(opencost_cloudcost_service_cost{window=\"$window\",cost_metric=\"$costMetric\"}, service)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
+        "definition": "label_values(opencost_cloudcost_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\",name=~\".*/${service:regex}$\"}, name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Resource",
+        "multi": false,
+        "name": "resource",
+        "options": [],
+        "query": {
+          "query": "label_values(opencost_cloudcost_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\",name=~\".*/${service:regex}$\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-$window",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "OpenCost / Cloud Costs (Prometheus Exporter)",
+  "uid": "opencost-cloud-costs-prom",
+  "version": 2,
+  "weekStart": ""
+}

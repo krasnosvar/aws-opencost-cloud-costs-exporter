@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "opencost-cloud-costs-exporter.fullname" . }}
+  labels:
+    {{- include "opencost-cloud-costs-exporter.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "opencost-cloud-costs-exporter.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "opencost-cloud-costs-exporter.selectorLabels" . | nindent 8 }}
+      {{- if .Values.scrape.enabled }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: {{ .Values.scrape.path | quote }}
+        prometheus.io/port: {{ .Values.scrape.port | quote }}
+      {{- end }}
+    spec:
+      containers:
+        - name: exporter
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: OPENCOST_URL
+              value: {{ .Values.opencost.url | quote }}
+            - name: WINDOW
+              value: {{ .Values.opencost.window | quote }}
+            - name: COST_METRIC
+              value: {{ .Values.opencost.costMetric | quote }}
+            {{- if .Values.opencost.costMetrics }}
+            - name: COST_METRICS
+              value: {{ join "," .Values.opencost.costMetrics | quote }}
+            {{- end }}
+            {{- if .Values.opencost.aggregates }}
+            - name: AGGREGATES
+              value: {{ join "," .Values.opencost.aggregates | quote }}
+            {{- end }}
+            - name: REFRESH_INTERVAL
+              value: {{ .Values.refreshInterval | quote }}
+            - name: HTTP_TIMEOUT
+              value: {{ .Values.httpTimeout | quote }}
+            - name: LISTEN_ADDR
+              value: ":8080"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 15
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

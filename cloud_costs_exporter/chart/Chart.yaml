@@ -1,0 +1,6 @@
+apiVersion: v2
+name: opencost-cloud-costs-exporter
+description: Prometheus exporter for OpenCost Cloud Costs API
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

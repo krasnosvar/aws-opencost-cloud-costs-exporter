@@ -1,0 +1,40 @@
+replicaCount: 1
+
+image:
+  repository: <REGISTRY>/<REPOSITORY>
+  tag: <TAG>
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+opencost:
+  url: http://opencost.opencost.svc.cluster.local:9003
+  window: 14d
+  costMetric: amortizedNetCost
+  # Optional: scrape multiple cost metrics (comma-separated in env).
+  # Examples: ["amortizedNetCost","netCost","listCost","amortizedCost","invoicedCost"]
+  costMetrics:
+    - amortizedNetCost
+    - netCost
+    - listCost
+    - amortizedCost
+    - invoicedCost
+  # Optional: scrape multiple aggregates (comma-separated in env).
+  # Use "item" to omit aggregate=... and get resource-like names from OpenCost:
+  # invoiceEntityID/accountID/provider/providerID/category/service
+  aggregates:
+    - service
+    - category
+    - item
+
+scrape:
+  enabled: true
+  path: /metrics
+  port: "8080"
+
+refreshInterval: 30m
+httpTimeout: 300s
+
+resources: {}
