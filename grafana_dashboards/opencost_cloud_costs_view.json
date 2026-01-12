@@ -101,7 +101,7 @@
         }
       ],
       "transformations": [],
-      "title": "Cumulative cost for $window (by day)",
+      "title": "Sum all resources cost by day",
       "type": "timeseries"
     },
     {
@@ -176,7 +176,7 @@
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (opencost_cloudcost_daily_service_cost{service=\"$service\",window=\"$window\",cost_metric=\"$costMetric\"})",
+          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (opencost_cloudcost_daily_aggregate_cost{aggregate=\"item\",name=\"$resource\",window=\"$window\",cost_metric=\"$costMetric\"})",
           "interval": "1d",
           "legendFormat": "Cost",
           "format": "time_series",
@@ -185,7 +185,7 @@
         }
       ],
       "transformations": [],
-      "title": "Daily cost ($service)",
+      "title": "Daily cost ($resource)",
       "type": "timeseries"
     },
     {
@@ -703,7 +703,7 @@
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (last_over_time(opencost_cloudcost_daily_service_cost{window=\"$window\",cost_metric=\"$costMetric\"}[25h]) and on(service) topk(10, last_over_time(opencost_cloudcost_service_cost{window=\"$window\",cost_metric=\"$costMetric\"}[13h])))",
+          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (opencost_cloudcost_daily_service_cost{window=\"$window\",cost_metric=\"$costMetric\"} and on(service) topk(10, last_over_time(opencost_cloudcost_service_cost{window=\"$window\",cost_metric=\"$costMetric\"}[13h])))",
           "interval": "1d",
           "legendFormat": "{{service}}",
           "format": "time_series",
@@ -712,7 +712,7 @@
         }
       ],
       "transformations": [],
-      "title": "Daily cost by resources (top 10)",
+      "title": "Daily cost by services (top 10)",
       "type": "timeseries"
     },
     {
@@ -787,7 +787,7 @@
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (last_over_time(opencost_cloudcost_daily_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\"}[25h]) and on(name) topk(10, last_over_time(opencost_cloudcost_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\"}[13h])))",
+          "expr": "max without(day,instance,job,namespace,pod,container,endpoint,deployment,machine,pod_template_hash,ready,app_kubernetes_io_instance,app_kubernetes_io_managed_by,app_kubernetes_io_name,app_kubernetes_io_version,helm_sh_chart) (opencost_cloudcost_daily_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\"} and on(name) topk(10, last_over_time(opencost_cloudcost_aggregate_cost{aggregate=\"item\",window=\"$window\",cost_metric=\"$costMetric\"}[13h])))",
           "interval": "1d",
           "legendFormat": "{{name}}",
           "format": "time_series",

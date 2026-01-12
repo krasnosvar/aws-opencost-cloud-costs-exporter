@@ -22,6 +22,7 @@ This folder contains Grafana dashboards used with OpenCost.
 
 - The dashboard expects the `opencost_cloudcost_*` metrics emitted by the Cloud Costs exporter.
 - Daily series are sparse (one sample per day); the dashboard queries are written to work with this and keep top‑10 selections stable.
+- If you use **VictoriaMetrics `vmagent`** to scrape the exporter, ensure your `scrape_config` has `honor_timestamps: true` (vmagent ignores target-provided timestamps by default in newer versions). Otherwise daily points will get the scrape time and panels will look wrong.
 
 ## Screenshot (Cloud Costs dashboard)
 
